@@ -1,0 +1,162 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../px-simple-kit-button/px-simple-kit-button.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+<!--
+Material design: [Icon toggles](https://www.google.com/design/spec/components/buttons.html#buttons-toggle-buttons)
+
+`px-buttons-selector` is a button with an image placed at the center. When the user touches
+the button, a ripple effect emanates from the center of the button.
+
+`px-buttons-selector` includes a default icon set.  Use `icon` to specify which icon
+from the icon set to use.
+
+    <px-buttons-selector icon="menu"></px-buttons-selector>
+
+See [`iron-iconset`](iron-iconset) for more information about
+how to use a custom icon set.
+
+Example:
+
+    <link href="path/to/iron-icons/iron-icons.html" rel="import">
+
+    <px-buttons-selector icon="favorite"></px-buttons-selector>
+    <px-buttons-selector src="star.png"></px-buttons-selector>
+
+To use `px-buttons-selector` as a link, wrap it in an anchor tag. Since `px-buttons-selector`
+will already receive focus, you may want to prevent the anchor tag from receiving focus
+as well by setting its tabindex to -1.
+
+    <a href="https://www.polymer-project.org" tabindex="-1">
+      <px-buttons-selector icon="polymer"></px-buttons-selector>
+    </a>
+
+### Styling
+
+Style the button with CSS as you would a normal DOM element. If you are using the icons
+provided by `iron-icons`, they will inherit the foreground color of the button.
+
+    /* make a red "favorite" button */
+    <px-buttons-selector icon="favorite" style="color: red;"></px-buttons-selector>
+
+By default, the ripple is the same color as the foreground at 25% opacity. You may
+customize the color using the `--px-buttons-selector-ink-color` custom property.
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--px-buttons-selector-disabled-text` | The color of the disabled button | `--disabled-text-color`
+`--px-buttons-selector-ink-color` | Selected/focus ripple color | `--primary-text-color`
+`--px-buttons-selector` | Mixin for a button | `{}`
+`--px-buttons-selector-disabled` | Mixin for a disabled button | `{}`
+`--px-buttons-selector-hover` | Mixin for button on hover | `{}`
+
+@group Paper Elements
+@element px-buttons-selector
+@demo demo/index.html
+-->
+
+<dom-module id="px-buttons-selector">
+  <template strip-whitespace>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .flex {
+         @apply(--layout-horizontal);
+       }
+
+      .container {
+        justify-content: center;
+      }
+
+      px-simple-kit-button {
+        --px-simple-kit-button-border-color: rgb(68, 173, 195);
+        --px-simple-kit-button-active-color: rgb(68, 173, 195);
+      }
+
+      px-simple-kit-button.device-icon {
+        color: rgb(70, 173, 0);
+        --px-simple-kit-button-ink-color: rgb(68, 173, 195);
+      }
+      px-simple-kit-button.device-icon:hover {
+        background-color: rgb(68, 173, 195);
+        color: white;
+      }
+
+    </style>
+
+    <iron-ajax
+      auto
+      url="[[url]]"
+      handle-as="json"
+      last-response="{{buttons}}">
+    </iron-ajax>
+
+    <iron-selector id="selector" attr-for-selected="name" selected="{{selected}}" class="container flex">
+      <template is="dom-repeat" items="{{buttons}}">
+        <px-simple-kit-button id="{{item.name}}" name="{{item.name}}" src="{{item.src}}" class="device-icon flex"></px-simple-kit-button>
+      </template>
+    </iron-selector>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'px-buttons-selector',
+
+      listeners: {
+        'iron-select':'buttonSelected',
+        'iron-deselect':'buttonDeselected'
+      },
+
+      // hostAttributes: {
+      //
+      // },
+      //
+      // behaviors: [
+      //
+      // ],
+
+      properties: {
+        buttons: {
+          type: Array,
+          value: function () { return []; } // Default value
+        }
+        // },
+        //
+        // prevSelectedButton: {
+        //   type: String,
+        //   value: function () { return ""; } // Default value
+        // }
+      },
+
+      buttonSelected: function() {
+        // this.prevSelectedButton.activate();
+        // this.prevSelectedButton = this.$.selector.selected;
+        // alert(this.$.selector.selected);
+      },
+
+      buttonDeselected: function() {
+        // this.prevSelectedButton.activate();
+        // this.prevSelectedButton = this.$.selector.selected;
+        // alert(this.$.selector.selected);
+      },
+
+    });
+  </script>
+</dom-module>
