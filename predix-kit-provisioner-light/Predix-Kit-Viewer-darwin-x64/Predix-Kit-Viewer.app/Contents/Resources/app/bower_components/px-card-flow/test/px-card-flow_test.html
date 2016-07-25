@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>px-card-flow test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../px-card-flow.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <px-card-flow></px-card-flow>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('px-card-flow', function() {
+
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'px-card-flow');
+        });
+
+      });
+    </script>
+  </body>
+</html>

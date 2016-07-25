@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head>
+    <title>edge-provisioner-app test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=yes">
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../src/edge-provisioner-app/edge-provisioner-app.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <edge-provisioner-app></edge-provisioner-app>
+      </template>
+    </test-fixture>
+
+    <script>suite("edge-provisioner-app",function(){test("instantiating the element works",function(){var e=fixture("basic");assert.equal(e.is,"edge-provisioner-app")})});</script>
+  
+
+</body></html>

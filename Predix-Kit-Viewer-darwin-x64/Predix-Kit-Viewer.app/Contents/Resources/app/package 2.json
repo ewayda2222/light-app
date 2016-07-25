@@ -1,0 +1,21 @@
+{
+  "name": "predix_kits_viewer",
+  "version": "1.0.0",
+  "description": "Predix kits dashboard",
+  "main": "service-worker.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.build.ge.com/predix-starter-kits/predix_kits_viewer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "simple-ssh": "^0.9.0"
+  }
+}

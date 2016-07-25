@@ -1,0 +1,16 @@
+{
+  "name": "px-pa-drilldown",
+  "description": "Predix PA Drilldown Menu",
+  "main": "px-pa-drilldown.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.0.0"
+  }
+}

@@ -1,0 +1,86 @@
+@font-face {
+  font-family: "ge-inspira-sans";
+  src: url("fonts/GESans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ge-inspira-sans";
+  src: url("fonts/GESans-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "ge-inspira-sans";
+  src: url("fonts/GESans-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ge-inspira-sans";
+  src: url("fonts/GESans-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "ge-inspira";
+  src: url("fonts/GEInspira-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ge-inspira";
+  src: url("fonts/GEInspira-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ge-inspira";
+  src: url("fonts/GEInspira-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "ge-inspira";
+  src: url("fonts/GEInspira-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "ge-inspira-small-caps";
+  src: url("fonts/GEInspira-SmallCaps.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-variant: small-caps;
+}
+@font-face {
+  font-family: "ge-inspira-symbols";
+  src: url("fonts/GEInspira-Symbols.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ge-inspira-medium";
+  src: url("fonts/GEInspira-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ge-inspira-medium";
+  src: url("fonts/GEInspira-MediumBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ge-inspira-medium";
+  src: url("fonts/GEInspira-MediumItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "ge-inspira-medium-small-caps";
+  src: url("fonts/GEInspira-MediumSmallCaps.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-variant: small-caps;
+}

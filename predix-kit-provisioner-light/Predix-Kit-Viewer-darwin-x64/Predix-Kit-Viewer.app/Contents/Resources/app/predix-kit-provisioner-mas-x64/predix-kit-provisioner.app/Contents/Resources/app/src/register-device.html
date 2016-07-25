@@ -1,0 +1,49 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/px-card-flow/px-card-flow.html">
+<link rel="import" href="../bower_components/iron-component-page/iron-component-page.html">
+<link rel="import" href="../bower_components/px-pa-drilldown/px-pa-drilldown.html">
+
+<dom-module id="register-device">
+
+  <template>
+
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        padding: 10px;
+        /*background-color: rgba(234, 234, 234, 1.0);*/
+      }
+
+      px-card-flow {
+        --px-card-flow-header-color: rgba(255, 255, 255, 1.0);
+      }
+
+    </style>
+
+    <!-- <px-pa-drilldown></px-pa-drilldown> -->
+    <px-card-flow></px-card-flow>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      is: 'register-device'
+
+    });
+
+  </script>
+
+</dom-module>

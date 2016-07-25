@@ -1,0 +1,146 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<link rel="stylesheet" type="text/css" href="css/jquery.jspanel.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+<!--<link rel="stylesheet" type="text/css" href="../css/NavigationPanel.css">-->
+<!--<link href="../css/dcdrilldown.css" rel="stylesheet" type="text/css" />-->
+<link rel="stylesheet" type="text/css" href="css/DrilldownMenu.css">
+<link rel="stylesheet" type="text/css" href="css/skins/graphite.css"/>
+
+<script type='text/javascript' src='js/jquery-1.12.4.min.js'></script>
+<script type='text/javascript' src='js/jquery-ui.min.js'></script>
+<script type='text/javascript' src='js/jquery.jspanel.js'></script>
+<script type='text/javascript' src='js/jquery.dcdrilldown.1.2.js'></script>
+
+<dom-module id="px-pa-drilldown">
+
+  <template>
+    <style>
+      /* CSS rules for your element */
+      :host {
+        display: inline-block;
+      }
+    </style>
+
+    <!-- local DOM for your element -->
+    <div class="wrap">
+      <div class="graphite demo-container">
+      </div>
+    </div>
+    <iron-ajax url="../{{treeUrl}}" last-response="{{browserContext}}" auto on-response="getChildren"></iron-ajax>
+  </template>
+
+  <script>
+    // element registration
+    Polymer({
+      is: "px-pa-drilldown",
+
+      // add properties and methods on the element's prototype
+
+      properties: {
+        // declare properties for the element's public API
+        treeUrl: {
+          type: String,
+          value: 'testTree.json',
+        },
+        parentField: {
+          type: String,
+          value: 'from',
+        },
+        idField: {
+          type: String,
+          value: 'to',
+        },
+        labelField: {
+          type: String,
+          value: 'to',
+        },
+        Breadcrumb: {
+          type: String,
+          value: '',
+        },
+        SelectedItem: {
+          type: String,
+          value: '',
+        },
+        SelectedItemId: {
+          type: String,
+          value: '',
+        },
+      },
+
+      ready: function () {
+                // Changing background color this way just to provide an example
+
+            },
+
+      getChildren: function(evt) {
+        if(evt.detail.response)
+        {
+          data = evt.detail.response;
+          $ctl = $(this).find(".demo-container");
+          //$ctl = this.jqElement;
+          $ctl.empty();
+          $ctl.append('<ul id="demo-container-list"></ul>');
+          var list = $('#demo-container-list', $ctl);
+          this.loadChildren(list, '', data.rows);
+          list.dcDrilldown(
+            {
+              showCount: false,
+              showHeader: true,
+              speed: 'fast',
+              saveState: false,
+              linkType: 'backButton',
+              includeHdr: true
+            }
+          );
+
+        }
+      },
+
+      loadChildren: function (list, requiredParentID, rows) {
+        var len = rows.length;
+
+        for (var rowId = 0; rowId < len; rowId++) {
+          var row = rows[rowId];
+          var parentID = row[this.parentField];
+
+          if (parentID === requiredParentID) {
+            var childID = row[this.idField];
+            var label = row[this.labelField];
+            var appendObj = list;
+            var newNode;
+
+            if (list.is('li')) {
+              if (list.children("ul").first().is("ul")) {
+                appendObj = list.children("ul").first();
+              }
+              else {
+                appendObj = $("<ul></ul>").appendTo(list);
+              }
+            }
+            var nodeId = childID.replace(/\s/g, '');
+            newNode = $("<li></li>").html('<div class="drilldownitem" id="' + nodeId + '" data-key="'+childID+'"><li>' + label + '</li></div>');
+
+            if (this.ddFirstChild === undefined) {
+              this.ddFirstChild = childID;
+              // check if breadcrumb is empty
+              var currentBreadcrumb = this.Breadcrumb;
+              if ((currentBreadcrumb === undefined ) || (currentBreadcrumb === '')) {
+                //setContext(label);
+                this.SelectedItem = label;
+                this.SelectedItemId = childID;
+              }
+            }
+
+            newNode.appendTo(appendObj);
+
+            this.loadChildren(newNode, childID, rows);
+          }
+        }
+      }
+    });
+  </script>
+
+</dom-module>

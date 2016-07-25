@@ -1,0 +1,22 @@
+{
+  "name": "font-inspira",
+  "version": "1",
+  "description": "Local Inspira Import",
+  "authors": [
+    "General Electric Company"
+  ],
+  "keywords": [
+    "font",
+    "inspira"
+  ],
+  "repository": {
+    "type": "local",
+    "url": "ge.com"
+  },
+  "main": "inspira.html",
+  "license": "ge.com",
+  "homepage": "ge.com",
+  "ignore": [
+    "/.*"
+  ]
+}

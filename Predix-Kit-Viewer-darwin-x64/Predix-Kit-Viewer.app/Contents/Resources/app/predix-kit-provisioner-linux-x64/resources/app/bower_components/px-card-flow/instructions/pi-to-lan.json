@@ -1,0 +1,5 @@
+[
+  {"instruction": "Open up your terminal or command prompt"},
+  {"instruction": "Execute 'ssh pi@raspberrypi.local' to connect to your Pi"},
+  {"instruction": "Once connected, execute './setup-lan.sh'"}
+]

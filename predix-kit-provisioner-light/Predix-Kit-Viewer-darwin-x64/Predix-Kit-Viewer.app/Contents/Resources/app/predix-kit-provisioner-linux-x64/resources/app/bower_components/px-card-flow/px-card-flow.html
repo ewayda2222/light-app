@@ -1,0 +1,387 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../px-simple-kit-button/px-simple-kit-button.html">
+<link rel="import" href="../px-buttons-selector/px-buttons-selector.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../px-instructions/px-instructions.html">
+
+<dom-module id="px-card-flow">
+  <template>
+    <style include="iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+
+      }
+
+      .px-card-flow-container {
+        height: 100%;
+        /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);*/
+        padding: 16px;
+        margin: 24px;
+        border-radius: 5px;
+        text-align:center;
+        /*background-color: rgba(255, 255, 255, 1.0);*/
+        color: #757575;
+      }
+
+      paper-spinner.thin {
+        height: 60px;
+        width: 60px;
+        --paper-spinner-stroke-width: 2px;
+        --paper-spinner-layer-1-color: rgba(68, 173, 195,0.5);
+        --paper-spinner-layer-2-color: rgba(49, 125, 157,0.6);
+        --paper-spinner-layer-3-color: rgba(68, 173, 195,0.7);
+        --paper-spinner-layer-4-color: rgba(49, 125, 157,0.8);
+        --paper-spinner-layer-5-color: rgba(68, 173, 195,0.9);
+      }
+
+      px-simple-kit-button {
+        --px-simple-kit-button-border-color: rgb(68, 173, 195);
+        --px-simple-kit-button-active-color: rgb(68, 173, 195);
+      }
+
+      px-simple-kit-button.device-icon {
+        color: rgb(74, 74, 74);
+        --px-simple-kit-button-ink-color: rgb(68, 173, 195);
+      }
+      px-simple-kit-button.device-icon:hover {
+        background-color: rgb(68, 173, 195);
+        color: white;
+      }
+
+      paper-toolbar {
+        --paper-toolbar-background: var(--px-card-flow-header-color);
+        --paper-toolbar-title: {
+          color: rgb(74,74,74);
+        }
+      }
+
+      paper-button {
+        color: rgb(74,74,74);
+      }
+
+      paper-input {
+        --paper-input-container-color: rgb(49, 125, 157);
+        --paper-input-container-focus-color: rgb(68, 173, 195);
+        --paper-input-container-input-color: rgb(74,74,74);
+        text-align:left;
+      }
+
+      .input {
+        margin-bottom: 24px;
+      }
+
+      h1 {
+        font-size: 26px;
+        margin: 16px 0;
+        color: rgb(74, 74, 74);
+      }
+
+      h2 {
+        font-size: 18px;
+        margin: 16px 0;
+        color: rgb(74, 74, 74);
+      }
+      </style>
+
+      <div class="px-card-flow-container">
+
+        <!-- <paper-toolbar>
+          <paper-button on-tap="backAction">
+            <iron-icon icon="chevron-left"></iron-icon>
+            Back
+          </paper-button>
+          <span class="title"></span>
+          <paper-button on-tap="continueAction">
+            Continue
+            <iron-icon icon="chevron-right"></iron-icon>
+          </paper-button>
+        </paper-toolbar> -->
+
+        <iron-pages id=cardPages role="main" selected="device-ssh" class="layout center" attr-for-selected="name">
+
+          <div name="device-ssh" class="layout card">
+            <h1>Connect to your Edge Device</h1>
+            <h2>This opens a secure shell to your edge device</h2>
+            <px-simple-kit-button button-title="Connect" class="device-icon flex" on-tap="sshConnect"></px-simple-kit-button>
+            <div></div>
+            <paper-spinner id="sshSpinner" class="thin"></paper-spinner>
+          </div>
+
+          <div name="wifi-setup" class="card">
+            <h1>Setup the Wifi for your Edge Device</h1>
+            <h2>Fill out the details below for the WiFi network</h2>
+            <div class="input">
+              <paper-input id="netName" label="WiFi Name (SSID)"></paper-input>
+              <paper-input id="netPass" label="WiFi Password" type="password"></paper-input>
+            </div>
+            <px-simple-kit-button button-title="Setup" class="device-icon flex" on-tap="setupWifi"></px-simple-kit-button>
+            <div></div>
+            <paper-spinner id="wifiSpinner" class="thin"></paper-spinner>
+          </div>
+
+          <div name="provision-device" class="card">
+            <h1>Provision your Edge Device</h1>
+            <h2>Fill out the details below with the information the Kit Viewer provided</h2>
+            <div class="input">
+              <paper-input id="username" label="Username"></paper-input>
+              <paper-input id="token" label="Token" type="password"></paper-input>
+              <paper-input id="deviceId" label="Device ID"></paper-input>
+              <paper-input id="kitType" label="Kit Type"></paper-input>
+            </div>
+            <px-simple-kit-button button-title="Provision" class="device-icon flex" on-tap="provisionDevice"></px-simple-kit-button>
+            <div></div>
+            <paper-spinner id="provisionSpinner" class="thin"></paper-spinner>
+          </div>
+
+          <div name="provision-successful" class="card">
+            <h1>Successfully provisioned your new device!</h1>
+            <iron-image src="./img/complete.png"></iron-image>
+            <h2>Go back to the Predix Kit Viewer to visualize and play with the new device and data</h2>
+          </div>
+
+        </iron-pages>
+
+      </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'px-card-flow',
+
+      properties: {
+        hardwarePlatform: {
+          type: String,
+          value: ''
+        },
+        kit: {
+          type: String,
+          value: ''
+        },
+      },
+
+      backAction: function() {
+        this.$.cardPages.selectPrevious();
+        // console.log(this.$.cardPages.selected);
+      },
+
+      continueAction: function() {
+        this.$.cardPages.selectNext();
+        // console.log(this.$.cardPages.selected);
+      },
+
+      sshConnect: function() {
+        var spinner = this.$.sshSpinner;
+        spinner.active = true;
+
+        var cardPages = this.$.cardPages;
+
+        var sshObj = {
+          server:             {
+            host:         "192.168.11.36",
+            port:         "22",
+            userName:     "root",
+            password:     "edison"
+          },
+
+          //commands desired
+          //git update predix-machine-edison
+          //setup and install flowthings
+          //
+          commands:           [
+            "`Test session text message: passed`",
+            "msg:ssh test passed : you are able to connect",
+            "echo $(pwd)"
+          ],
+          msg: {
+            send: function( message ) {
+              console.log(message);
+            }
+          },
+          connectedMessage:   "Connected",
+          readyMessage:       "Running commands Now",
+          closedMessage:      "Completed"
+        };
+        //until npm published use the cloned dir path.
+        var SSH2Shell = require ('ssh2shell');
+
+        //run the commands in the shell session
+        var SSH = new SSH2Shell(sshObj);
+
+        SSH.on ('commandComplete', function onCommandComplete( command, response, sshObj ) {
+            //confirm it is the root home dir and change to root's .ssh folder
+            if (command == "echo $(pwd)" && response.indexOf("/root") != -1 ) {
+              //do nothing for now
+            }
+          });
+
+        SSH.on ('end', function onEnd( sessionText, sshObj ) {
+            //go to the next page in the provisioner
+            spinner.active = false;
+            cardPages.selectNext();
+
+            //show the full session output. This could be emailed or saved to a log file.
+            sshObj.msg.send("\nThis is the full session responses:\n" + sessionText);
+          });
+
+        SSH.connect();
+
+      },
+
+      setupWifi: function() {
+        var spinner = this.$.wifiSpinner;
+        spinner.active = true;
+
+        var cardPages = this.$.cardPages;
+
+        var netName = this.$.netName;
+        var netPass = this.$.netPass;
+
+        var sshObj = {
+          server:             {
+            host:         "192.168.11.36",
+            port:         "22",
+            userName:     "root",
+            password:     "edison"
+          },
+
+          //commands desired
+          //git update predix-machine-edison
+          //setup and install flowthings
+          //
+          commands:           [
+            "`Test session text message: passed`",
+            "msg:you are connected",
+            "echo $(pwd)"
+          ],
+          msg: {
+            send: function( message ) {
+              console.log(message);
+            }
+          },
+          connectedMessage:   "Connected",
+          readyMessage:       "Running commands Now",
+          closedMessage:      "Completed"
+        };
+        //until npm published use the cloned dir path.
+        var SSH2Shell = require ('ssh2shell');
+
+        //run the commands in the shell session
+        var SSH = new SSH2Shell(sshObj);
+
+        SSH.on ('commandProcessing', function onCommandProcessing( command, response, sshObj ) {
+            //confirm it is the root home dir and change to root's .ssh folder
+              sshObj.commands.unshift("msg:" + netName.value);
+              sshObj.commands.unshift("msg:" + netName.value);
+
+          });
+
+        SSH.on ('commandComplete', function onCommandComplete( command, response, sshObj ) {
+            //confirm it is the root home dir and change to root's .ssh folder
+            if (command == "echo $(pwd)" && response.indexOf("/root") != -1 ) {
+              //do nothing for now
+              sshObj.commands.unshift("msg:" + netName.value);
+              sshObj.commands.unshift("msg:" + netName.value);
+            }
+          });
+
+        SSH.on ('end', function onEnd( sessionText, sshObj ) {
+            //go to the next page in the provisioner
+            spinner.active = false;
+            cardPages.selectNext();
+
+            //show the full session output. This could be emailed or saved to a log file.
+            sshObj.msg.send("\nThis is the full session responses:\n" + sessionText);
+          });
+
+        SSH.connect();
+
+      },
+
+      provisionDevice: function() {
+        var spinner = this.$.provisionSpinner;
+        spinner.active = true;
+
+        var cardPages = this.$.cardPages;
+
+        var username = this.$.username;
+        var token = this.$.token;
+        var deviceId = this.$.deviceId;
+        var kitType = this.$.kitType;
+
+        var sshObj = {
+          server:             {
+            host:         "192.168.11.36",
+            port:         "22",
+            userName:     "root",
+            password:     "edison"
+          },
+
+          //commands desired
+          //git update predix-machine-edison
+          //setup and install flowthings
+          //
+          commands:           [
+            "`Test session text message: passed`",
+            "msg:you are connected",
+            "echo $(pwd)"
+          ],
+          msg: {
+            send: function( message ) {
+              console.log(message);
+            }
+          },
+          connectedMessage:   "Connected",
+          readyMessage:       "Running commands Now",
+          closedMessage:      "Completed"
+        };
+        //until npm published use the cloned dir path.
+        var SSH2Shell = require ('ssh2shell');
+
+        //run the commands in the shell session
+        var SSH = new SSH2Shell(sshObj);
+
+        SSH.on ('commandProcessing', function onCommandProcessing( command, response, sshObj ) {
+            //confirm it is the root home dir and change to root's .ssh folder
+            sshObj.commands.unshift("msg:" + username.value);
+            sshObj.commands.unshift("msg:" + token.value);
+            sshObj.commands.unshift("msg:" + deviceId.value);
+            sshObj.commands.unshift("msg:" + kitType.value);
+
+          });
+
+        SSH.on ('commandComplete', function onCommandComplete( command, response, sshObj ) {
+            //confirm it is the root home dir and change to root's .ssh folder
+            if (command == "echo $(pwd)" && response.indexOf("/root") != -1 ) {
+              //do nothing for now
+              sshObj.commands.unshift("msg:" + username.value);
+              sshObj.commands.unshift("msg:" + token.value);
+              sshObj.commands.unshift("msg:" + deviceId.value);
+              sshObj.commands.unshift("msg:" + kitType.value);
+            }
+          });
+
+        SSH.on ('end', function onEnd( sessionText, sshObj ) {
+            //go to the next page in the provisioner
+            spinner.active = false;
+            cardPages.selectNext();
+
+            //show the full session output. This could be emailed or saved to a log file.
+            sshObj.msg.send("\nThis is the full session responses:\n" + sessionText);
+          });
+
+        SSH.connect();
+      }
+
+    });
+  </script>
+</dom-module>

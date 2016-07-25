@@ -1,0 +1,53 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-image/iron-image.html">
+
+<dom-module id="px-instructions">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+      }
+
+      .number {
+          vertical-align: middle;
+          margin-right: 8px;
+      }
+    </style>
+
+    <iron-ajax
+      auto
+      url="[[url]]"
+      handle-as="json"
+      last-response="{{instructions}}">
+    </iron-ajax>
+
+    <template is="dom-repeat" items="{{instructions}}">
+        <h2><iron-image class="number" src="{{getCurrentInstruction(index)}}"></iron-image>{{item.instruction}}</h2>
+    </template>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'px-instructions',
+
+      properties: {
+        instructions: {
+          type: Array,
+          value: function () { return []; } // Default value
+        }
+      },
+
+      getCurrentInstruction: function(index) {
+        var i = index + 1;
+        var currentInstruction = "bower_components/px-instructions/img/" + i + ".png";
+        console.log(currentInstruction);
+        return currentInstruction;
+      }
+
+    });
+  </script>
+</dom-module>

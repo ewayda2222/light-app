@@ -1,0 +1,22 @@
+{
+	"rows": [{
+		"from": "",
+		"to": "customers.1.BCO",
+		"connectionType": "Contains"
+	},
+	{
+		"from": "customers.1.BCO",
+		"to": "buildings.1.BCO",
+		"connectionType": "Contains"
+	},
+	{
+		"from": "buildings.1.BCO",
+		"to": "rooms.US.RR5-2.Antigua.Conference.Room.BCO",
+		"connectionType": "Contains"
+	},
+	{
+		"from": "rooms.US.RR5-2.Antigua.Conference.Room.BCO",
+		"to": "solutions.07b1c9.BCO",
+		"connectionType": "Contains"
+	}]
+}
